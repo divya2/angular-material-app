@@ -1,0 +1,53 @@
+<section class="signup-form">
+    <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" fxLayoutGap="10px" (ngSubmit) = "onSubmit(f)">
+        <mat-form-field>
+            <input 
+            type="email" 
+            matInput 
+            placeholder="Your email" 
+            ngModel 
+            name="email"
+            email
+            required
+            #emailInput="ngModel">
+        </mat-form-field>
+        <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
+        <mat-form-field hintLabel="Should be 5 characters long">
+            <input 
+            type="password" 
+            matInput 
+            placeholder="Your password" 
+            ngModel 
+            name="password"
+            required
+            minlength="5"
+            #pwInput="ngModel">
+            <mat-hint align="end">{{pwInput.value?.length}}</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+                matInput 
+                [matDatepicker]="date" 
+                placeholder="Your birthdate"
+                [max]="maxDate"
+                ngModel
+                required
+                color="primary"
+            [ngModelOptions]="{standalone: true}">
+            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+            <mat-datepicker #date></mat-datepicker>
+        </mat-form-field>
+        <mat-checkbox
+            ngModel
+            name="agree"
+            required
+            color="primary">
+            Agree to terms and conditions*
+        </mat-checkbox>
+        <button 
+            type="submit" 
+            mat-raised-button 
+            color="primary"
+            [disabled]="f.invalid">Submit</button>
+    </form>
+</section>
